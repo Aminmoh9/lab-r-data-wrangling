@@ -81,7 +81,7 @@ colSums(is.na(super_store))
 
 2. Replace missing values in the Postal Code column with the mode (most frequent value).
 ```{r}
-#Creating a function to get the mode
+#Replace missing values with Mode
 library(DescTools)
 
 super_store <- super_store %>%
@@ -218,11 +218,6 @@ sales_by_category <- super_store %>%
 head(sales_by_category)
 ```
 ```{r}
-
-```
-
-2. Create a scatter plot of Sales vs. Profit with a trend line.
-```{r}
 #Bar plot
 library(ggplot2)
 library(scales)
@@ -237,8 +232,19 @@ ggplot(sales_by_category, aes(x = Category, y = Total_Sales, fill = Category)) +
         plot.title = element_text(hjust = 0.5)) +  
   scale_y_continuous(labels = comma)
 
-  
+```
 
+2. Create a scatter plot of Sales vs. Profit with a trend line.
+```{r}
+ggplot(super_store, aes(x = Sales, y = Profit)) +
+  geom_point(color = "blue", size = 2) +
+  geom_smooth(method = "lm", color = "red", se = TRUE) +
+  labs(title = "Scatter Plot of Sales vs. Profit with Trend Line",
+       x = "Sales",
+       y = "Profit") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+  
 ```
 
 3. Create a histogram of Profit_Margin.
